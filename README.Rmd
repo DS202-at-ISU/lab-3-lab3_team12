@@ -88,3 +88,25 @@ cat("Character with the most returns:", character_most_returns, "with", most_ret
 ### Include your answer
 
 Their statement was correct! Jocasta has the most deaths and returns with 5 each.
+
+
+
+##Luke Richard 
+
+Each team member picks one of the statements in the FiveThirtyEight [analysis](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/) and fact checks it based on the data. Use dplyr functionality whenever possible.
+
+### FiveThirtyEight Statement
+
+Given the Avengers’ 53 years in operation and overall mortality rate, fans of the comics can expect one current or former member to die every seven months or so
+
+### Include the code
+
+```{r}
+death_year <- total_deaths / 52
+death_period <- 1 / (death_year / 12)
+death_period
+```
+
+### Include your answer
+
+Our results disagree with their statement. We have a death occurring every 2.8 months, or just over 4 a year.
