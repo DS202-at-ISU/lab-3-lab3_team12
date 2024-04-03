@@ -88,3 +88,9 @@ cat("Character with the most returns:", character_most_returns, "with", most_ret
 ### Include your answer
 
 Their statement was correct! Jocasta has the most deaths and returns with 5 each.
+
+### Include your answer
+There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.8
+
+
+
