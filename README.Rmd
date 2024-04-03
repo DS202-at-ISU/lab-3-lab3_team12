@@ -47,6 +47,8 @@ returns <- av %>%
   pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") %>%
   filter(Return != "") %>%
   mutate(Time = parse_number(Time))
+
+returns
 ```
 
 Based on these datasets calculate the average number of deaths an Avenger suffers.
@@ -90,7 +92,19 @@ cat("Character with the most returns:", character_most_returns, "with", most_ret
 Their statement was correct! Jocasta has the most deaths and returns with 5 each.
 
 ### Include your answer
-There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.8
+There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
 
+```{r}
+num_died_once <- sum(returns$Death1 == "YES" & returns$Return == "YES") #number of people who died once
+num_died_twice <- sum(returns$Death2=="YES" & returns$Return == "YES")
+num_died_three <- sum(returns$Death3=="YES" & returns$Return == "YES")
+
+print(num_died_once/nrow(returns))
+print(num_died_twice/nrow(returns))
+print(num_died_three/nrow(returns))
+
+
+```
+```
 
 
