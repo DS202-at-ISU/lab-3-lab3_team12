@@ -47,6 +47,8 @@ returns <- av %>%
   pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") %>%
   filter(Return != "") %>%
   mutate(Time = parse_number(Time))
+
+returns
 ```
 
 Based on these datasets calculate the average number of deaths an Avenger suffers.
@@ -115,6 +117,29 @@ Their statement was correct! Jocasta has the most deaths and returns with 5 each
 
 mazin- the statement was correct as well. after running it in all the deaths written with 173 listed avengers, it showed that the number of deaths more than once is 69.
 
+
 Luke R- Our results are slightly off their statement. We have a death occurring every 6.2 months, but that is showing activity for 115 years, which doesn't match their statement of 53 years of activity.
 
 Upload your changes to the repository. Discuss and refine answers as a team.
+
+### Include your answer
+There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
+
+```{r}
+num_died_once <- sum(av$Death1 == "YES" & av$Return1 == "YES") #number of people who died once
+num_died_twice <- sum(av$Death2=="YES" & av$Return2 == "YES")
+num_died_three <- sum(av$Death3=="YES" & av$Return3 == "YES")
+
+
+
+cat("Percentage of a member from the avengers to return from 1st death" , num_died_once / sum(av$Death1 == "YES"))
+print(" ")
+
+cat("Percentage of a member from the avengers to return from 2nd death" , num_died_twice / sum(av$Death2 == "YES"))
+
+print(" ")
+cat("Percentage of a member from the avengers to return from 3rd death" , num_died_three / sum(av$Death3 == "YES"))
+
+```
+
+
