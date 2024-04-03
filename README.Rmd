@@ -72,6 +72,9 @@ Each team member picks one of the statements in the FiveThirtyEight [analysis](h
 
 The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times.
 
+mazin- Out of 173 listed Avengers, my analysis found that 69 had died at least one time after they joined the team.
+
+
 ### Include the code
 
 ```{r}
@@ -87,9 +90,24 @@ cat("Character with the most deaths:", character_most_deaths, "with", most_death
 cat("Character with the most returns:", character_most_returns, "with", most_returns, "returns\n")
 ```
 
+
+```{r}
+avengers <- av %>%
+  mutate(Total_Deaths = rowSums(select(., starts_with("Death")) == "YES"))
+
+
+died_at_least_once <- sum(avengers$Total_Deaths > 0)
+
+
+died_at_least_once
+
+```
+
 ### Include your answer
 
 Their statement was correct! Jocasta has the most deaths and returns with 5 each.
+
+mazin- the statement was correct as well. after running it in all the deaths written with 173 listed avengers, it showed that the number of deaths more than once is 69.
 
 ### Include your answer
 There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
