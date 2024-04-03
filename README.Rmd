@@ -56,6 +56,8 @@ total_returns <- sum(returns$Time)
 
 num_avengers <- nrow(av)
 average_deaths <- (total_deaths - total_returns) / num_avengers
+
+average_deaths
 ```
 
 ## Individually
