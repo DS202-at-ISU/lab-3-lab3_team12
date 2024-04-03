@@ -100,7 +100,28 @@ returns <- av %>%
   pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") %>%
   filter(Return != "") %>%
   mutate(Time = parse_number(Time))
+
+returns
 ```
+
+    ## # A tibble: 89 × 18
+    ##    URL                Name.Alias Appearances Current. Gender Probationary.Introl
+    ##    <chr>              <chr>            <int> <chr>    <chr>  <chr>              
+    ##  1 http://marvel.wik… "Henry Jo…        1269 YES      MALE   ""                 
+    ##  2 http://marvel.wik… "Janet va…        1165 YES      FEMALE ""                 
+    ##  3 http://marvel.wik… "Anthony …        3068 YES      MALE   ""                 
+    ##  4 http://marvel.wik… "Robert B…        2089 YES      MALE   ""                 
+    ##  5 http://marvel.wik… "Thor Odi…        2402 YES      MALE   ""                 
+    ##  6 http://marvel.wik… "Thor Odi…        2402 YES      MALE   ""                 
+    ##  7 http://marvel.wik… "Steven R…        3458 YES      MALE   ""                 
+    ##  8 http://marvel.wik… "Clinton …        1456 YES      MALE   ""                 
+    ##  9 http://marvel.wik… "Clinton …        1456 YES      MALE   ""                 
+    ## 10 http://marvel.wik… "Pietro M…         769 YES      MALE   ""                 
+    ## # ℹ 79 more rows
+    ## # ℹ 12 more variables: Full.Reserve.Avengers.Intro <chr>, Year <int>,
+    ## #   Years.since.joining <int>, Honorary <chr>, Death1 <chr>, Death2 <chr>,
+    ## #   Death3 <chr>, Death4 <chr>, Death5 <chr>, Notes <chr>, Time <dbl>,
+    ## #   Return <chr>
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
@@ -175,12 +196,12 @@ died_at_least_once
     ## [1] 69
 
 ``` r
-death_year <- total_deaths / 53
+death_year <- total_deaths / max(av$Years.since.joining)
 death_period <- 1 / (death_year / 12)
 death_period #Luke code
 ```
 
-    ## [1] 2.864865
+    ## [1] 6.216216
 
 ### Include your answer
 
@@ -191,5 +212,51 @@ mazin- the statement was correct as well. after running it in all the
 deaths written with 173 listed avengers, it showed that the number of
 deaths more than once is 69.
 
-Luke R- Our results disagree with their statement. We have a death
-occurring every 2.8 months, or just over 4 a year.
+Luke R- Our results are slightly off their statement. We have a death
+occurring every 6.2 months, but that is showing activity for 115 years,
+which doesn’t match their statement of 53 years of activity.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Include your answer
+
+There’s a 2-in-3 chance that a member of the Avengers returned from
+their first stint in the afterlife, but only a 50 percent chance they
+recovered from a second or third death.
+
+``` r
+num_died_once <- sum(av$Death1 == "YES" & av$Return1 == "YES") #number of people who died once
+num_died_twice <- sum(av$Death2=="YES" & av$Return2 == "YES")
+num_died_three <- sum(av$Death3=="YES" & av$Return3 == "YES")
+
+
+
+cat("Percentage of a member from the avengers to return from 1st death" , num_died_once / sum(av$Death1 == "YES"))
+```
+
+    ## Percentage of a member from the avengers to return from 1st death 0.6666667
+
+``` r
+print(" ")
+```
+
+    ## [1] " "
+
+``` r
+cat("Percentage of a member from the avengers to return from 2nd death" , num_died_twice / sum(av$Death2 == "YES"))
+```
+
+    ## Percentage of a member from the avengers to return from 2nd death 0.5
+
+``` r
+print(" ")
+```
+
+    ## [1] " "
+
+``` r
+cat("Percentage of a member from the avengers to return from 3rd death" , num_died_three / sum(av$Death3 == "YES"))
+```
+
+    ## Percentage of a member from the avengers to return from 3rd death 0.5

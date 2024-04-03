@@ -70,11 +70,13 @@ Each team member picks one of the statements in the FiveThirtyEight [analysis](h
 
 ### FiveThirtyEight Statement
 
-The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times.
+Andrew- The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times.
 
 mazin- Out of 173 listed Avengers, my analysis found that 69 had died at least one time after they joined the team.
 
 Luke R- Given the Avengers’ 53 years in operation and overall mortality rate, fans of the comics can expect one current or former member to die every seven months or so
+
+There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
 
 ### Include the code
 
@@ -111,19 +113,6 @@ death_period <- 1 / (death_year / 12)
 death_period #Luke code
 ```
 
-### Include your answer
-
-Their statement was correct! Jocasta has the most deaths and returns with 5 each.
-
-mazin- the statement was correct as well. after running it in all the deaths written with 173 listed avengers, it showed that the number of deaths more than once is 69.
-
-
-Luke R- Our results are slightly off their statement. We have a death occurring every 6.2 months, but that is showing activity for 115 years, which doesn't match their statement of 53 years of activity.
-
-Upload your changes to the repository. Discuss and refine answers as a team.
-
-### Include your answer
-There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
 
 ```{r}
 num_died_once <- sum(av$Death1 == "YES" & av$Return1 == "YES") #number of people who died once
@@ -142,4 +131,16 @@ cat("Percentage of a member from the avengers to return from 3rd death" , num_di
 
 ```
 
+### Include your answer
+
+Their statement was correct! Jocasta has the most deaths and returns with 5 each.
+
+mazin- the statement was correct as well. after running it in all the deaths written with 173 listed avengers, it showed that the number of deaths more than once is 69.
+
+
+Luke R- Our results are slightly off their statement. We have a death occurring every 6.2 months, but that is showing activity for 115 years, which doesn't match their statement of 53 years of activity.
+
+Their statement was correct.
+
+Upload your changes to the repository. Discuss and refine answers as a team.
 
