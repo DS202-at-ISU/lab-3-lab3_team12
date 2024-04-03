@@ -31,9 +31,32 @@ head(av)
 
 Get the data into a format where the five columns for Death[1-5] are replaced by two columns: Time, and Death. Time should be a number between 1 and 5 (look into the function `parse_number`); Death is a categorical variables with values "yes", "no" and "". Call the resulting data set `deaths`. 
 
+``` {r}
+library(tidyverse)
+
+deaths <- av %>%
+  pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") %>%
+  filter(Death != "") %>%
+  mutate(Time = parse_number(Time))
+```
+
 Similarly, deal with the returns of characters.
 
-Based on these datasets calculate the average number of deaths an Avenger suffers. 
+``` {r}
+returns <- av %>%
+  pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") %>%
+  filter(Return != "") %>%
+  mutate(Time = parse_number(Time))
+```
+
+Based on these datasets calculate the average number of deaths an Avenger suffers.
+```{r}
+total_deaths <- sum(deaths$Time)
+total_returns <- sum(returns$Time)
+
+num_avengers <- nrow(av)
+average_deaths <- (total_deaths - total_returns) / num_avengers
+```
 
 ## Individually
 
