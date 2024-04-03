@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/kHEW-1QV)
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
@@ -72,10 +71,51 @@ between 1 and 5 (look into the function `parse_number`); Death is a
 categorical variables with values “yes”, “no” and ““. Call the resulting
 data set `deaths`.
 
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+    ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+    ## ✔ purrr     1.0.2     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+deaths <- av %>%
+  pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") %>%
+  filter(Death != "") %>%
+  mutate(Time = parse_number(Time))
+```
+
 Similarly, deal with the returns of characters.
+
+``` r
+returns <- av %>%
+  pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") %>%
+  filter(Return != "") %>%
+  mutate(Time = parse_number(Time))
+```
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
+
+``` r
+total_deaths <- sum(deaths$Time)
+total_returns <- sum(returns$Time)
+
+num_avengers <- nrow(av)
+average_deaths <- (total_deaths - total_returns) / num_avengers
+
+average_deaths
+```
+
+    ## [1] 0.6127168
 
 ## Individually
 
@@ -88,17 +128,68 @@ possible.
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an
+android based on Janet van Dyne and built by Ultron — who has been
+destroyed five times and then recovered five times.
+
+mazin- Out of 173 listed Avengers, my analysis found that 69 had died at
+least one time after they joined the team.
+
+Luke R- Given the Avengers’ 53 years in operation and overall mortality
+rate, fans of the comics can expect one current or former member to die
+every seven months or so
 
 ### Include the code
 
-Make sure to include the code to derive the (numeric) fact for the
-statement
+``` r
+most_deaths_index <- which.max(deaths$Time)
+character_most_deaths <- deaths$Name.Alias[most_deaths_index]
+most_deaths <- deaths$Time[most_deaths_index]
+
+most_returns_index <- which.max(returns$Time)
+character_most_returns <- returns$Name.Alias[most_returns_index]
+most_returns <- returns$Time[most_returns_index]
+
+cat("Character with the most deaths:", character_most_deaths, "with", most_deaths, "deaths\n")
+```
+
+    ## Character with the most deaths: Jocasta with 5 deaths
+
+``` r
+cat("Character with the most returns:", character_most_returns, "with", most_returns, "returns\n")
+```
+
+    ## Character with the most returns: Jocasta with 5 returns
+
+``` r
+avengers <- av %>%
+  mutate(Total_Deaths = rowSums(select(., starts_with("Death")) == "YES"))
+
+
+died_at_least_once <- sum(avengers$Total_Deaths > 0)
+
+
+died_at_least_once
+```
+
+    ## [1] 69
+
+``` r
+death_year <- total_deaths / 53
+death_period <- 1 / (death_year / 12)
+death_period #Luke code
+```
+
+    ## [1] 2.864865
 
 ### Include your answer
 
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
+Their statement was correct! Jocasta has the most deaths and returns
+with 5 each.
 
-Upload your changes to the repository. Discuss and refine answers as a
-team.
+mazin- the statement was correct as well. after running it in all the
+deaths written with 173 listed avengers, it showed that the number of
+deaths more than once is 69.
+
+Luke R- Our results disagree with their statement. We have a death
+occurring every 2.8 months, or just over 4 a year.

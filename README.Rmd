@@ -70,6 +70,10 @@ Each team member picks one of the statements in the FiveThirtyEight [analysis](h
 
 The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times.
 
+mazin- Out of 173 listed Avengers, my analysis found that 69 had died at least one time after they joined the team.
+
+Luke R- Given the Avengers’ 53 years in operation and overall mortality rate, fans of the comics can expect one current or former member to die every seven months or so
+
 ### Include the code
 
 ```{r}
@@ -85,28 +89,32 @@ cat("Character with the most deaths:", character_most_deaths, "with", most_death
 cat("Character with the most returns:", character_most_returns, "with", most_returns, "returns\n")
 ```
 
-### Include your answer
-
-Their statement was correct! Jocasta has the most deaths and returns with 5 each.
-
-
-
-##Luke Richard 
-
-Each team member picks one of the statements in the FiveThirtyEight [analysis](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/) and fact checks it based on the data. Use dplyr functionality whenever possible.
-
-### FiveThirtyEight Statement
-
-Given the Avengers’ 53 years in operation and overall mortality rate, fans of the comics can expect one current or former member to die every seven months or so
-
-### Include the code
 
 ```{r}
-death_year <- total_deaths / 52
+avengers <- av %>%
+  mutate(Total_Deaths = rowSums(select(., starts_with("Death")) == "YES"))
+
+
+died_at_least_once <- sum(avengers$Total_Deaths > 0)
+
+
+died_at_least_once
+
+```
+
+
+```{r}
+death_year <- total_deaths / max(av$Years.since.joining)
 death_period <- 1 / (death_year / 12)
-death_period
+death_period #Luke code
 ```
 
 ### Include your answer
 
-Our results disagree with their statement. We have a death occurring every 2.8 months, or just over 4 a year.
+Their statement was correct! Jocasta has the most deaths and returns with 5 each.
+
+mazin- the statement was correct as well. after running it in all the deaths written with 173 listed avengers, it showed that the number of deaths more than once is 69.
+
+Luke R- Our results are slightly off their statement. We have a death occurring every 6.2 months, but that is showing activity for 115 years, which doesn't match their statement of 53 years of activity.
+
+Upload your changes to the repository. Discuss and refine answers as a team.
