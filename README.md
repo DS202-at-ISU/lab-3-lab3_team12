@@ -147,7 +147,7 @@ Each team member picks one of the statements in the FiveThirtyEight
 and fact checks it based on the data. Use dplyr functionality whenever
 possible.
 
-### FiveThirtyEight Statement
+### FiveThirtyEight Statement Drew Kinneer
 
 The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an
 android based on Janet van Dyne and built by Ultron — who has been
@@ -181,6 +181,8 @@ cat("Character with the most returns:", character_most_returns, "with", most_ret
 ```
 
     ## Character with the most returns: Jocasta with 5 returns
+
+### Luke Code
 
 ``` r
 avengers <- av %>%
