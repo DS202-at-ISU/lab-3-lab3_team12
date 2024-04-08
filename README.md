@@ -182,7 +182,7 @@ cat("Character with the most returns:", character_most_returns, "with", most_ret
 
     ## Character with the most returns: Jocasta with 5 returns
 
-### Luke Code
+---
 
 ``` r
 avengers <- av %>%
